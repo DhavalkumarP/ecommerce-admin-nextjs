@@ -1,10 +1,24 @@
-import { Button } from "@/components/ui/button";
+"use client"
 
-export default function Home() {
+import { useEffect } from "react";
+
+import { useStoreModal } from "@/hooks/use-store-modal";
+
+const SetupPage = () => {
+  const isOpen = useStoreModal((state) => state.isOpen);
+  const onOpen = useStoreModal((state) => state.onOpen);
+
+  useEffect(() => {
+    if (!isOpen) {
+      onOpen();
+    }
+  }, [isOpen, onOpen]);
+
   return (
-    <div className="flex justify-center gap-1 flex-col items-center h-screen">
-      <p>Hello world</p>
-      <Button size="sm">Click me</Button>
+    <div className="p-4">
+      Root Page
     </div>
-  )
-}
+  );
+};
+
+export default SetupPage;
